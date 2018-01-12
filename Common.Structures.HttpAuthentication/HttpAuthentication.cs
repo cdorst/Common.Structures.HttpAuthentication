@@ -4,7 +4,12 @@ namespace Common.Structures.HttpAuthentication
 {
     public abstract class HttpAuthentication
     {
-        protected abstract string Prefix { get; }
+        public HttpAuthentication(string prefix)
+        {
+            Prefix = prefix;
+        }
+
+        protected string Prefix { get; }
         protected abstract string Value { get; }
 
         public AuthenticationHeaderValue Header

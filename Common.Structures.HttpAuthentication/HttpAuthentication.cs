@@ -1,24 +1,25 @@
-﻿using ProtoBuf;
+﻿using Common.EnumStringValues;
+using ProtoBuf;
 using System.Net.Http.Headers;
 
 namespace Common.Structures.HttpAuthentication
 {
     [ProtoContract]
-    public abstract class HttpAuthentication
+    public class HttpAuthentication
     {
-        public HttpAuthentication(string prefix, string value)
+        public HttpAuthentication(PrefixType prefix, string value)
         {
             Prefix = prefix;
             Value = value;
         }
 
         [ProtoMember(1)]
-        public string Prefix { get; set; }
+        public PrefixType Prefix { get; set; }
 
         [ProtoMember(2)]
         public string Value { get; set; }
 
         public AuthenticationHeaderValue Header
-            => new AuthenticationHeaderValue(Prefix, Value);
+            => new AuthenticationHeaderValue(Prefix.GetStringValue(), Value);
     }
 }
